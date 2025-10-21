@@ -1,5 +1,3 @@
-import java.net.Socket;
-
 public class Nodo
 {
     String dato;
