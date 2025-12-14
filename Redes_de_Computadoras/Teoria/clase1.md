@@ -1,54 +1,62 @@
 # Modelo de referencia OSI y TCP/IP
-Para mandar datos por la red necesitas normal y reglas a eso se l llama PROTOCOLO la manera de como se mandan los datos.
+Para mandar datos por la red se necesitan normas y reglas; a esto se le llama **PROTOCOLO**, que define la manera en que se envían y reciben los datos.
+
 Todas las tarjetas de red tienen:
-- Direccion MAC (Fundamental en LAN, formato hexadesimal)
-- Direeccion IP (Tiene 32 bits, se divide por 4 octetos,pueden ser estaticas o dinamicas)
+- **Dirección MAC** (fundamental en LAN, formato hexadecimal de 48 bits, única por fabricante)
+- **Dirección IP** (IPv4 tiene 32 bits, se divide en 4 octetos; puede ser estática o dinámica mediante DHCP)
 
 ## OSI
-### Forma que ciajan los datos
-Un paquete tiene una unidad de informacion logicamente y tiene informacion del origen y el destino
-#### Protocolo
-Detecta la conecccion fisica (claveado o no)
+### Forma en que viajan los datos
+Un **paquete** es una unidad de información lógica que contiene datos y encabezados con información del **origen** y el **destino**.
 
-El modelo de OSI tiene 7 capas:
-1. Fisico
-2. Enlace de datos
-3. Red 
-4. Trasporte
-5. Secion
-6. Presentacion
-7. Aplicacion
+#### Protocolo
+Define cómo se establece la comunicación, el formato de los datos y cómo se detectan y corrigen errores. La detección de conexión física (cableado o no) corresponde a capas inferiores.
+
+El modelo **OSI** tiene **7 capas**:
+1. **Físico**: transmisión de bits (medios, voltajes, conectores, velocidades).
+2. **Enlace de datos**: tramas, direcciones MAC, detección de errores (Ethernet, ARP).
+3. **Red**: direccionamiento lógico y enrutamiento (IP, ICMP).
+4. **Transporte**: comunicación extremo a extremo, control de flujo y errores (TCP, UDP).
+5. **Sesión**: establecimiento, mantenimiento y cierre de sesiones.
+6. **Presentación**: formato de datos, codificación, compresión y cifrado (TLS/SSL).
+7. **Aplicación**: servicios al usuario final (HTTP, FTP, SMTP, DNS).
 
 ## Puertos
-Todos los puetos todos tiene 65536 puertos cada pueto sirve para algo 
+Todos los hosts tienen **65536 puertos lógicos** (0–65535). Cada puerto identifica un servicio o proceso.
 
-### Puertos fisicos
-Puertos UVA HDMI Displey port etc, en red puerto fibra optica etc
+### Puertos físicos
+Puertos de hardware: USB, HDMI, DisplayPort; en red: RJ‑45 (Ethernet), fibra óptica, etc.
 
-### Puertos logicos
-el rango de puertos logicos tiene 2 bytes puertos 
-- Los 0 al 1023 estan reservados para puertos sistema
-- Los puertos 1024 al 49151 son puertos de usuario
-- Los puertos de 49 al 65535 llmados puertos dinamicos o privados
+### Puertos lógicos
+El rango de puertos lógicos usa **16 bits (2 bytes)**:
+- **0–1023**: puertos bien conocidos o del sistema (HTTP 80, HTTPS 443, SSH 22).
+- **1024–49151**: puertos registrados (aplicaciones de usuario).
+- **49152–65535**: puertos dinámicos o efímeros (asignados temporalmente por el SO).
 
-
-
-" la papa de trasnporte agrega una encabezado (pueto destipo puerto origen) en la capa de red le agregan (ip destino ip oriigen)  en la capa enlace de datos agrega (MAc origen o MAc destino) "
+> En la **capa de transporte** se agrega un encabezado con **puerto origen** y **puerto destino**.  
+> En la **capa de red** se agrega **IP origen** e **IP destino**.  
+> En la **capa de enlace de datos** se agrega **MAC origen** y **MAC destino**.
 
 ## TCP/IP
-Tiene  4 capas
-- Aplicacion
-- Trasporte
-- Internet 
-- Acceso a la red
+Tiene **4 capas**:
+- **Aplicación** (equivale a aplicación, presentación y sesión del OSI)
+- **Transporte**
+- **Internet**
+- **Acceso a la red** (enlace de datos + físico)
 
 ### TCP
-Orientado a la coneccion hay un intercambio de datos inicial (three-wey-handshake) asegura la entrega espera a que todos los paquetes lleguen, si uno falta no se puede establecer para hacer eso utilizan numeros de secuencia.
+Orientado a la conexión. Usa el **three‑way handshake** (SYN, SYN‑ACK, ACK). Asegura entrega confiable, ordenada y sin duplicados mediante **números de secuencia**, **ACK**, **control de flujo** y **retransmisiones**. Usado por HTTP/HTTPS, FTP, SMTP.
+
 ### UDP
-No erientado a la conexcion no hay un intecambio de datos inicial no hace nada que el TCP hace no corrige errores no utiliza retrasnmiciones lo bueno es que es rapipdo
+No orientado a la conexión. No hay handshake inicial. No garantiza entrega, orden ni corrección de errores. Es rápido y con baja latencia. Usado por DNS, streaming, VoIP y juegos en línea.
 
+UDP **no asegura** la entrega confiable.
 
-
-UDP no asegura la entrega confiable
-
+### Datos de importancia crucial
+- **ARP** resuelve IP → MAC dentro de la LAN.
+- **ICMP** se usa para diagnóstico (ping, traceroute).
+- **NAT** traduce direcciones privadas a públicas.
+- **DNS** traduce nombres de dominio a direcciones IP.
+- **DHCP** asigna IP automáticamente.
+- **MTU** define el tamaño máximo de trama; si se excede, ocurre fragmentación.
 

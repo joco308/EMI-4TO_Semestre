@@ -1,40 +1,39 @@
 # VLAN
-Dividir el trafo logico, mayor seguridad, divide el trafico y separa las vlans, funcionan en lo switches, cada vlan es un dominio de difucion.  
-en el ruter para que se puedan comunicar las VLAN se crean sub interfaces.  
-**brotkas de difucion**
-- seguridad mejorada
-- reducion de costos
-- mejor rendimiento 
-- dominnios de difucion
-- eficioencia de TI
-- eficioncia administrativa
-- administacio  de proyectos mas simple y aplicaciones  
+Una **VLAN** (Virtual LAN) permite dividir el tráfico de manera lógica, mejorando la seguridad y el rendimiento de la red. Cada VLAN funciona dentro de un **switch** como un dominio de difusión independiente. Para que las VLAN puedan comunicarse a través de un **router**, se crean **subinterfaces**.
 
-## que vlan tenemos
-- VLAN predeterminanda
-- VLAN nativa
-- VLAN de administacion
+### Beneficios de las VLAN
+- Seguridad mejorada
+- Reducción de costos
+- Mejor rendimiento de la red
+- Dominios de difusión independientes
+- Eficiencia de TI
+- Eficiencia administrativa
+- Administración de proyectos y aplicaciones más simple
 
-## show vlan brief
-muestras las vlans de un switch
-## no vlan 'N'
-borra la vlan, no puedes borrar las nativas que son 5  
+## Tipos de VLAN
+- **VLAN predeterminada**: VLAN por defecto en todos los switches (normalmente VLAN 1).
+- **VLAN nativa**: VLAN que no se etiqueta en un enlace troncal.
+- **VLAN de administración**: VLAN usada para acceder y administrar el switch remotamente.
 
-**trafivo de voz, pc con voz.  
-la latencia en una red tiene que ser 150ms en voz**  
+## Comandos útiles
+- `show vlan brief`: muestra todas las VLAN configuradas en un switch.
+- `no vlan N`: elimina la VLAN N (no se pueden eliminar las VLAN nativas, que normalmente son 5).
 
-## enlaces troncales de VLAN
-ees un enlace punto a punto que trasnporta datos de cualquier VLAN por una interface saca todo el trafico sin importar de que VLAN pertenesca  
+### Tráfico de voz
+- Para redes con **telefonía IP**, la latencia máxima recomendada es **150 ms**.
+- Se puede crear una VLAN específica para el tráfico de voz, separando los datos de PC y voz.
 
-**direfencia entre encapsular y etiquetar al configurar elruter**
+## Enlaces troncales (trunk)
+Un **enlace troncal** permite transportar el tráfico de múltiples VLAN a través de una sola interfaz, sin importar la VLAN de origen.
+- **Encapsular**: método para incluir información de VLAN en el paquete.
+- **Etiquetar**: se marca el paquete con la VLAN correspondiente para identificar su origen al pasar por el troncal.
 
-# Asignacion de puertos a redes VLAN
-interface **interface_id**
+## Asignación de puertos a VLAN
+```
+interface <interface_id>
 switchport mode access
-switchport access vlan **vlan_id**
-
-un pueto puede estar en mode access o en trunck que en acces solo pasa trafico de la vlan asignada y el trunk pasa cualquier trafico de cualquier vlan
-la configuracion se guerda en **flash:vlan.dat**
-
-
+switchport access vlan <vlan_id>
+```
+- Un puerto puede estar en **mode access** (solo pasa tráfico de la VLAN asignada) o **trunk** (pasa tráfico de todas las VLAN).
+- La configuración se guarda en `flash:vlan.dat`.
 
